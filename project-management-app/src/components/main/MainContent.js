@@ -1,10 +1,20 @@
-import './MainContent.css';
+import CreateProjectForm from './CreateProjectForm';
 
-const MainContent = () => {
+const MainContent = ({formVisible, setFormVisible, setProjectList}) => {
+
+    const createProject = (inputValue) => {
+        setProjectList((previousValue) => {
+            return [
+                previousValue,
+                inputValue
+            ]
+        })
+    }
+
     return (
-        <section>
-            <h1 className="my-8 text-center text-5xl font-bold">Hello World</h1>
-        </section>
+        <div className='flex-initial justify-start w-8/12'>
+            {formVisible && <CreateProjectForm onAddProject={createProject} setFormVisible={setFormVisible}/>}
+        </div>
     )
 }
 

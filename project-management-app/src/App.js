@@ -1,20 +1,24 @@
 import Sidebar from './components/main/Sidebar';
 import MainContent from './components/main/MainContent';
-
-const DUMMY_CONTENT = [
-  {
-    title: 'First project',
-    description: 'This is a test project'
-  }
-]
+import { useState } from 'react';
 
 function App() {
+
+  const [formVisible, setFormVisible] = useState(false);
+  const [projectList, setProjectList] = useState([{
+    'project-title': '',
+    'project-description': '',
+    'project-date': ''
+  }]);
+
+  console.log(projectList)
+
   return (
-    <>
-      <Sidebar projectsList={DUMMY_CONTENT}/>
-      <MainContent />
-    </>
-  );
+    <div className="flex my-9 flex-row h-screen">
+      <Sidebar setFormVisible={setFormVisible} projectList={projectList ? projectList : ''}/>
+      <MainContent setFormVisible={setFormVisible} formVisible={formVisible} setProjectList={setProjectList}/>
+    </div>
+  )
 }
 
 export default App;
