@@ -1,19 +1,32 @@
 import CreateProjectForm from './CreateProjectForm';
+import ProjectDetailsView from './ProjectDetailsView';
+import NoProjects from './NoProjects';
 
-const MainContent = ({formVisible, setFormVisible, setProjectList}) => {
+const MainContent = ({formVisible, setFormVisible, setProjectList, projectList, setSelectedProject, selectedProject, openForm}) => {
 
-    const createProject = (inputValue) => {
-        setProjectList((previousValue) => {
+    function createProject(inputValue){
+        setProjectList(previousValue => {
             return [
-                previousValue,
+                ...previousValue,
                 inputValue
             ]
         })
     }
 
+    function deleteProject(project){
+        setProjectList(previousValue => {
+            if(previousValue){
+                return previousValue.filter(el => el['id'] !== project['id']);
+            }
+        })
+        setSelectedProject('');
+    }
+
     return (
-        <div className='flex-initial justify-start w-8/12'>
+        <div className='w-8/12'>
+            {formVisible || selectedProject ? '' : <NoProjects openForm={openForm}/>}
             {formVisible && <CreateProjectForm onAddProject={createProject} setFormVisible={setFormVisible}/>}
+            {selectedProject && <ProjectDetailsView setProjectList={setProjectList} projectList={projectList} selectedProject={selectedProject} deleteProject={deleteProject} />}
         </div>
     )
 }
