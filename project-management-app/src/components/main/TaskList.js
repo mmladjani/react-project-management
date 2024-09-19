@@ -32,7 +32,6 @@ const TaskList = ({selectedProject, setProjectList, projectList}) => {
 
                 }
                 return project;
-
             });
         });
 
