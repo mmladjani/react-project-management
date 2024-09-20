@@ -1,7 +1,11 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import Button from '../ui/Button';
+import { ProjectContext } from '../../store/ProjectContext';
 
 const CreateProjectForm = ({setFormVisible, onAddProject}) => {
+
+    const { handleCreateProject } = useContext(ProjectContext);
+    console.log(handleCreateProject);
 
     const inputTitle = useRef();
     const inputDescription = useRef();
@@ -16,6 +20,14 @@ const CreateProjectForm = ({setFormVisible, onAddProject}) => {
             [inputDate.current.id]: inputDate.current.value,
             tasks: []
         });
+
+        handleCreateProject({
+            id: Math.random(),
+            [inputTitle.current.id]: inputTitle.current.value,
+            [inputDescription.current.id]: inputDescription.current.value,
+            [inputDate.current.id]: inputDate.current.value,
+            tasks: []
+        })
         closeForm();
     }
 

@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import Button from '../ui/Button';
 import TaskList from './TaskList';
+import { ProjectContext } from '../../store/ProjectContext';
 
 const ProjectDetailsView = ({setProjectList, projectList, selectedProject, deleteProject}) => {
+
+    const { handleDeleteProject } = useContext(ProjectContext);
 
     const currentDate = new Date(selectedProject['project-date']);
     const dateTimeFormatter = new Intl.DateTimeFormat("en-US", {dateStyle: 'long'});
