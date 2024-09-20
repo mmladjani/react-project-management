@@ -23,6 +23,7 @@ function projectListReducer(state, action){
     if(action.type === 'DELETE_PROJECT'){
         return {
             ...state,
+            selectedProject: null,
             projectList: state.projectList.filter(project => project['id'] !== action.payload['id'])
         }
     }
