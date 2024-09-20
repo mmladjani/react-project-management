@@ -1,12 +1,9 @@
 import Sidebar from './components/main/Sidebar';
 import MainContent from './components/main/MainContent';
-import { useState, useContext } from 'react';
-import { ProjectContext } from './store/ProjectContext';
+import { useState } from 'react';
 import ProjectContextProvider from './store/ProjectContext';
 
 function App() {
-
-  const { items } = useContext(ProjectContext);
 
   const [formVisible, setFormVisible] = useState(false);
   const [projectList, setProjectList] = useState('');

@@ -8,18 +8,20 @@ export const ProjectContext = createContext({
 
 function projectListReducer(state, action){
     console.log(state, 'state')
-    const newProjectList = [...state.projectList];
-
     if(action.type === 'ADD_PROJECT'){  
-        return [
-            ...newProjectList,
-            action.payload
-        ]
+        return {
+            ...state,
+            projectList: [
+                ...state.projectList,
+                action.payload
+            ]
+        }
     }
 
     if(action.type === 'DELETE_PROJECT'){
-        if(newProjectList.langth){
-            return newProjectList.filter(el => el['id'] !== action.payload['id']);
+        return {
+            ...state,
+            projectList: state.projectList.filter(project => project['id'] !== action.payload['id'])
         }
     }   
 }
@@ -37,10 +39,10 @@ export default function ProjectContextProvider({children}){
         });
     }
 
-    function deleteProject(project){
+    function deleteProject(selectedProject){
         projectListDispatch({
             type: 'DELETE_PROJECT',
-            payload: project
+            payload: selectedProject
         })
     }
 
@@ -50,7 +52,7 @@ export default function ProjectContextProvider({children}){
         handleDeleteProject: deleteProject
     }
 
-    console.log(valueCtx, 'valueCtx');
+    console.log(projectListState, 'projectListState');
 
     return (
         <ProjectContext.Provider value={valueCtx}>

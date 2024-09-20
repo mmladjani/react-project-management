@@ -16,7 +16,7 @@ const ProjectDetailsView = ({setProjectList, projectList, selectedProject, delet
             <div className="flex flex-row align-middle justify-between">
                 <h1 className="block text-xl font-bold justify-start">{selectedProject['project-title']}</h1>
                 <Button
-                    onClick={() => deleteProject(selectedProject)}
+                    onClick={() => handleDeleteProject(selectedProject)}
                     className="border-b-2 border-slate-900 font-medium text-sm w-full sm:w-auto text-center"    
                 >Delete</Button>
             </div>

@@ -5,7 +5,6 @@ import { ProjectContext } from '../../store/ProjectContext';
 const CreateProjectForm = ({setFormVisible, onAddProject}) => {
 
     const { handleCreateProject } = useContext(ProjectContext);
-    console.log(handleCreateProject);
 
     const inputTitle = useRef();
     const inputDescription = useRef();
@@ -27,7 +26,8 @@ const CreateProjectForm = ({setFormVisible, onAddProject}) => {
             [inputDescription.current.id]: inputDescription.current.value,
             [inputDate.current.id]: inputDate.current.value,
             tasks: []
-        })
+        });
+
         closeForm();
     }
 
