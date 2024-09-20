@@ -1,6 +1,7 @@
 import { useContext, useRef } from 'react';
 import Button from '../ui/Button';
 import { ProjectContext } from '../../store/ProjectContext';
+import { nanoid } from 'nanoid';
 
 const CreateProjectForm = ({setFormVisible, onAddProject}) => {
 
@@ -21,7 +22,7 @@ const CreateProjectForm = ({setFormVisible, onAddProject}) => {
         });
 
         handleCreateProject({
-            id: Math.random(),
+            id: nanoid(),
             [inputTitle.current.id]: inputTitle.current.value,
             [inputDescription.current.id]: inputDescription.current.value,
             [inputDate.current.id]: inputDate.current.value,

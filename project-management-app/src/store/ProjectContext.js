@@ -2,12 +2,14 @@ import { createContext, useReducer } from "react";
 
 export const ProjectContext = createContext({
     projectList: [],
+    selectedProject: null,
     handleCreateProject: () => {},
     handleDeleteProject: () => {}
 });
 
 function projectListReducer(state, action){
-    console.log(state, 'state')
+    console.log(state.projectList, 'state')
+    console.log(action.payload, 'action.payload')
     if(action.type === 'ADD_PROJECT'){  
         return {
             ...state,
@@ -23,19 +25,27 @@ function projectListReducer(state, action){
             ...state,
             projectList: state.projectList.filter(project => project['id'] !== action.payload['id'])
         }
-    }   
+    }
+    
+    if(action.type === 'SELECT_PROJECT'){
+        return {
+            ...state,
+            selectedProject: action.payload
+        }
+    }
 }
 
 export default function ProjectContextProvider({children}){
 
     const [projectListState, projectListDispatch] = useReducer(projectListReducer, {
-        projectList: []
+        projectList: [],
+        selectedProject: {}
     })
 
-    function createProject(inputValue){
+    function createProject(formInputValues){
         projectListDispatch({
             type: 'ADD_PROJECT',
-            payload: inputValue
+            payload: formInputValues
         });
     }
 
@@ -46,13 +56,19 @@ export default function ProjectContextProvider({children}){
         })
     }
 
-    const valueCtx = {
-        projectList: projectListState,
-        handleCreateProject: createProject,
-        handleDeleteProject: deleteProject
+    function selectProject(project){
+        projectListDispatch({
+            type: "SELECT_PROJECT",
+            payload: project
+        })
     }
 
-    console.log(projectListState, 'projectListState');
+    const valueCtx = {
+        projectList: projectListState.projectList,
+        handleCreateProject: createProject,
+        handleDeleteProject: deleteProject,
+        handleSelectProject: selectProject
+    }
 
     return (
         <ProjectContext.Provider value={valueCtx}>
