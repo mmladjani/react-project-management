@@ -1,6 +1,10 @@
+import { useContext } from 'react';
 import Button from '../ui/Button';
+import { ProjectContext } from '../../store/ProjectContext';
 
-const Sidebar = ({projectList, setFormVisible, setSelectedProject, openForm}) => {
+const Sidebar = ({ setFormVisible, setSelectedProject, openForm }) => {
+
+    const { projectList, handleSelectProject } = useContext(ProjectContext);
 
     function handleProject(project) {
         setSelectedProject(project);
@@ -14,7 +18,7 @@ const Sidebar = ({projectList, setFormVisible, setSelectedProject, openForm}) =>
                 <div className='flex flex-col'>
                 {projectList.map((project) => {
                     return (
-                        <div className="my-3 mx-3 text-md" key={project['id']} onClick={() => handleProject(project)}>
+                        <div className="my-3 mx-3 text-md" key={project['id']} onClick={() => handleSelectProject(project.id)}>
                             <div className='flex flex-col'>
                                 <h3 className='text-base font-thin'>{project['project-title']}</h3>
                             </div>

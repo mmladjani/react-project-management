@@ -1,16 +1,21 @@
 import { createContext, useReducer } from "react";
+import { nanoid } from "nanoid";
 
 export const ProjectContext = createContext({
     projectList: [],
-    selectedProject: null,
+    selectedProjectId: null,
     handleCreateProject: () => {},
-    handleDeleteProject: () => {}
+    handleDeleteProject: () => {},
+    handleAddTask: () => {}
 });
 
 function projectListReducer(state, action){
-    console.log(state.projectList, 'state')
-    console.log(action.payload, 'action.payload')
+
     if(action.type === 'ADD_PROJECT'){  
+
+        console.log(state, 'state');
+        console.log(action, 'action');
+
         return {
             ...state,
             projectList: [
@@ -21,17 +26,51 @@ function projectListReducer(state, action){
     }
 
     if(action.type === 'DELETE_PROJECT'){
+
+        console.log(state, 'state');
+        console.log(action, 'action');
+
         return {
             ...state,
-            selectedProject: null,
+            selectedProjectId: null,
             projectList: state.projectList.filter(project => project['id'] !== action.payload['id'])
         }
     }
     
     if(action.type === 'SELECT_PROJECT'){
+
+        console.log(state, 'state');
+        console.log(action, 'action');
+
         return {
             ...state,
-            selectedProject: action.payload
+            selectedProjectId: action.payload
+        }
+    }
+
+    if(action.type === 'ADD_TASK'){
+
+        console.log(state, 'state');
+        console.log(action, 'action');
+
+        return {
+            ...state,
+            projectList: state.projectList.map(project => {
+                if(project.id === action.payload){
+                    const updatedTasks = [
+                        ...project.tasks, 
+                        {
+                            id: nanoid(),
+                            'task-title': action.payload
+                        }];
+
+                    return { 
+                        ...project,
+                        tasks: updatedTasks
+                    };
+                }
+                return project;
+            })
         }
     }
 }
@@ -40,7 +79,7 @@ export default function ProjectContextProvider({children}){
 
     const [projectListState, projectListDispatch] = useReducer(projectListReducer, {
         projectList: [],
-        selectedProject: {}
+        selectedProjectId: null
     })
 
     function createProject(formInputValues){
@@ -64,12 +103,22 @@ export default function ProjectContextProvider({children}){
         })
     }
 
+    function addTask(taskInputValue) {
+        projectListDispatch ({
+            type: "ADD_TASK",
+            payload: taskInputValue
+        })
+    };
+
     const valueCtx = {
         projectList: projectListState.projectList,
         handleCreateProject: createProject,
         handleDeleteProject: deleteProject,
-        handleSelectProject: selectProject
+        handleSelectProject: selectProject,
+        handleAddTask: addTask
     }
+
+    console.log(projectListState, 'projectListState')
 
     return (
         <ProjectContext.Provider value={valueCtx}>
