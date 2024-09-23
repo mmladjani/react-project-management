@@ -81,8 +81,8 @@ function projectListReducer(state, action){
         return {
             ...state,
             projectList: state.projectList.map(project => { 
-                if(project.id === selectedProject.id){
-                    const filteredArray = project.tasks.filter(el => el['id'] !== taskId);
+                if(project.id === state.selectedProject.id){
+                    const filteredArray = project.tasks.filter(task => task['id'] !== action.payload);
                     return { 
                         ...project, 
                         tasks: filteredArray 
