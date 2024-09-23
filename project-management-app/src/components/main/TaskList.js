@@ -5,23 +5,9 @@ import { ProjectContext } from "../../store/ProjectContext";
 
 const TaskList = () => {
 
-    const { projectList, selectedProject, handleAddTask } = useContext(ProjectContext);
+    const { projectList, selectedProject, handleAddTask, handleDeleteTask } = useContext(ProjectContext);
 
     const taskTitle = useRef();
-
-    // function clearTasks(taskId) {
-    //     setProjectList((previousValue) => {
-    //         return previousValue.map(project => { 
-    //             if(project.id === selectedProject.id){
-    //                 const filteredArray = project.tasks.filter(el => el['id'] !== taskId);
-    //                 return { ...project, tasks: filteredArray };
-
-    //             }
-    //             return project;
-    //         });
-    //     });
-
-    // };
 
     const currentProject = projectList.filter(project => project.id === selectedProject.id);
 
@@ -53,7 +39,7 @@ const TaskList = () => {
                     return (
                         <div className="flex flex-row justify-between">
                             <li className="my-3" key={task['id']}>{task['task-title']}</li>
-                            <Button onClick={""}>Clear</Button>
+                            <Button onClick={() => handleDeleteTask(task['id'])}>Clear</Button>
                         </div>
                         )
                     }
