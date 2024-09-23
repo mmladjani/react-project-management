@@ -6,7 +6,8 @@ export const ProjectContext = createContext({
     selectedProject: {},
     handleCreateProject: () => {},
     handleDeleteProject: () => {},
-    handleAddTask: () => {}
+    handleAddTask: () => {},
+    handleDeleteTask: () => {}
 });
 
 function projectListReducer(state, action){
@@ -73,6 +74,24 @@ function projectListReducer(state, action){
             })
         }
     }
+
+    if(action.type === 'DELETE_TASK'){
+        console.log('delete task');
+
+        return {
+            ...state,
+            projectList: state.projectList.map(project => { 
+                if(project.id === selectedProject.id){
+                    const filteredArray = project.tasks.filter(el => el['id'] !== taskId);
+                    return { 
+                        ...project, 
+                        tasks: filteredArray 
+                    };
+                }
+                return project;
+            })
+        }
+    }
 }
 
 export default function ProjectContextProvider({children}){
@@ -110,12 +129,20 @@ export default function ProjectContextProvider({children}){
         })
     };
 
+    function deleteTask(taskId){
+        projectListDispatch({
+            type: "DELETE_TASK",
+            payload: taskId
+        })
+    }
+
     const valueCtx = {
         projectList: projectListState.projectList,
         handleCreateProject: createProject,
         handleDeleteProject: deleteProject,
         handleSelectProject: selectProject,
-        handleAddTask: addTask
+        handleAddTask: addTask,
+        handleDeleteTask: deleteTask
     }
 
     console.log(projectListState, 'projectListState')
