@@ -3,29 +3,11 @@ import { useRef, useContext } from 'react';
 
 import { ProjectContext } from "../../store/ProjectContext";
 
-const TaskList = ({ setProjectList }) => {
+const TaskList = () => {
 
-    const { projectList, selectedProjectId, handleAddTask } = useContext(ProjectContext);
+    const { projectList, selectedProject, handleAddTask } = useContext(ProjectContext);
 
     const taskTitle = useRef();
-    
-    // function addTask(taskInputValue) {
-    //     setProjectList((previousValue) => {
-    //         return previousValue.map(project => { 
-    //             if(project.id === selectedProject.id){
-
-    //                 const updatedTasks = [...project.tasks, {
-    //                     id: Math.random(),
-    //                     'task-title': taskInputValue
-    //                 }];
-    //             return { ...project, tasks: updatedTasks };
-
-    //             }
-    //         return project;
-
-    //         });
-    //     });
-    // };
 
     // function clearTasks(taskId) {
     //     setProjectList((previousValue) => {
@@ -41,8 +23,7 @@ const TaskList = ({ setProjectList }) => {
 
     // };
 
-    const selectedProject = projectList.filter(project => project.id === selectedProjectId);
-    console.log(selectedProject, 'selectedProject')
+    const currentProject = projectList.filter(project => project.id === selectedProject.id);
 
     return ( 
         <div className="flex flex-col my-9">
@@ -68,7 +49,7 @@ const TaskList = ({ setProjectList }) => {
                 </div>
             </div>
             <ul className="flex flex-col">
-                {selectedProject[0].tasks.length ? selectedProject[0].tasks.map((task) => {
+                {currentProject[0].tasks.length ? currentProject[0].tasks.map((task) => {
                     return (
                         <div className="flex flex-row justify-between">
                             <li className="my-3" key={task['id']}>{task['task-title']}</li>

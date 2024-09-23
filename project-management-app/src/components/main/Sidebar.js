@@ -2,14 +2,9 @@ import { useContext } from 'react';
 import Button from '../ui/Button';
 import { ProjectContext } from '../../store/ProjectContext';
 
-const Sidebar = ({ setFormVisible, setSelectedProject, openForm }) => {
+const Sidebar = ({ openForm }) => {
 
     const { projectList, handleSelectProject } = useContext(ProjectContext);
-
-    function handleProject(project) {
-        setSelectedProject(project);
-        setFormVisible(false);
-    }
     
     return (
         <div className='flex-initial w-80 bg-slate-900 rounded-tr-lg'>

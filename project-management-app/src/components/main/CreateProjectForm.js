@@ -12,14 +12,6 @@ const CreateProjectForm = ({setFormVisible, onAddProject}) => {
     const inputDate = useRef();
 
     function submitForm(event) {
-        event.preventDefault();
-        onAddProject({
-            id: Math.random(),
-            [inputTitle.current.id]: inputTitle.current.value,
-            [inputDescription.current.id]: inputDescription.current.value,
-            [inputDate.current.id]: inputDate.current.value,
-            tasks: []
-        });
 
         handleCreateProject({
             id: nanoid(),

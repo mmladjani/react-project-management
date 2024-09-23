@@ -3,9 +3,9 @@ import Button from '../ui/Button';
 import TaskList from './TaskList';
 import { ProjectContext } from '../../store/ProjectContext';
 
-const ProjectDetailsView = ({setProjectList, projectList, selectedProject, deleteProject}) => {
+const ProjectDetailsView = ({ setProjectList, projectList }) => {
 
-    const { handleDeleteProject } = useContext(ProjectContext);
+    const { selectedProject, handleDeleteProject } = useContext(ProjectContext);
 
     const currentDate = new Date(selectedProject['project-date']);
     const dateTimeFormatter = new Intl.DateTimeFormat("en-US", {dateStyle: 'long'});
@@ -24,7 +24,7 @@ const ProjectDetailsView = ({setProjectList, projectList, selectedProject, delet
                 <p className="text-sm text-gray-400 mb-5">{formattedDate}</p>
                 <p className="text-md font-thin mb-9">{selectedProject['project-description']}</p>
                 <hr />
-                <TaskList selectedProject={selectedProject} setProjectList={setProjectList} projectList={projectList} />
+                <TaskList />
             </div>
         </div>
     )
