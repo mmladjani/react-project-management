@@ -3,7 +3,7 @@ import Button from '../ui/Button';
 import TaskList from './TaskList';
 import { ProjectContext } from '../../store/ProjectContext';
 
-const ProjectDetailsView = ({ setProjectList, projectList }) => {
+const ProjectDetailsView = () => {
 
     const { selectedProject, handleDeleteProject } = useContext(ProjectContext);
 

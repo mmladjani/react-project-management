@@ -1,32 +1,18 @@
+import { useContext } from 'react';
 import CreateProjectForm from './CreateProjectForm';
 import ProjectDetailsView from './ProjectDetailsView';
 import NoProjects from './NoProjects';
+import { ProjectContext } from '../../store/ProjectContext';
 
-const MainContent = ({formVisible, setFormVisible, setProjectList, projectList, setSelectedProject, selectedProject, openForm}) => {
+const MainContent = ({formVisible, setFormVisible, setProjectList, setSelectedProject, openForm}) => {
 
-    function createProject(inputValue){
-        setProjectList(previousValue => {
-            return [
-                ...previousValue,
-                inputValue
-            ]
-        })
-    }
-
-    function deleteProject(project){
-        setProjectList(previousValue => {
-            if(previousValue){
-                return previousValue.filter(el => el['id'] !== project['id']);
-            }
-        })
-        setSelectedProject('');
-    }
+    const { selectedProject } = useContext(ProjectContext);
 
     return (
         <div className='w-8/12'>
             {formVisible || selectedProject ? '' : <NoProjects openForm={openForm}/>}
-            {formVisible && <CreateProjectForm onAddProject={createProject} setFormVisible={setFormVisible}/>}
-            {selectedProject && <ProjectDetailsView setProjectList={setProjectList} projectList={projectList} selectedProject={selectedProject} deleteProject={deleteProject} />}
+            {formVisible && <CreateProjectForm setFormVisible={setFormVisible}/>}
+            {selectedProject && <ProjectDetailsView />}
         </div>
     )
 }

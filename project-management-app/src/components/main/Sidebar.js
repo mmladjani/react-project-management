@@ -13,7 +13,7 @@ const Sidebar = ({ openForm }) => {
                 <div className='flex flex-col'>
                 {projectList.map((project) => {
                     return (
-                        <div className="my-3 mx-3 text-md" key={project['id']} onClick={() => handleSelectProject(project.id)}>
+                        <div className="my-3 mx-3 text-md" key={project['id']} onClick={() => handleSelectProject(project)}>
                             <div className='flex flex-col'>
                                 <h3 className='text-base font-thin'>{project['project-title']}</h3>
                             </div>

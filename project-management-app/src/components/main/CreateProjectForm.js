@@ -3,7 +3,7 @@ import Button from '../ui/Button';
 import { ProjectContext } from '../../store/ProjectContext';
 import { nanoid } from 'nanoid';
 
-const CreateProjectForm = ({setFormVisible, onAddProject}) => {
+const CreateProjectForm = ({ setFormVisible }) => {
 
     const { handleCreateProject } = useContext(ProjectContext);
 
