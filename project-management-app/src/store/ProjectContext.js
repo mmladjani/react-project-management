@@ -60,7 +60,7 @@ function projectListReducer(state, action){
         return {
             ...state,
             projectList: state.projectList.map(project => {
-                if(project.id === action.payload){
+                if(project.id === state.selectedProject['id']){
                     const updatedTasks = [
                         ...project.tasks, 
                         {
