@@ -4,7 +4,7 @@ import { ProjectContext } from '../../store/ProjectContext';
 
 const Sidebar = ({ openForm }) => {
 
-    const { projectList, handleSelectProject } = useContext(ProjectContext);
+    const { projectList, handleCreateProjectFormView, handleSelectProject } = useContext(ProjectContext);
     
     return (
         <div className='flex-initial w-80 bg-slate-900 rounded-tr-lg'>
@@ -24,7 +24,7 @@ const Sidebar = ({ openForm }) => {
                 <Button
                     className="border border-white hover:bg-white hover:text-slate-800 focus:ring-1 focus:outline-none focus:ring-white font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center my-3 mx-3"
                     type="button" 
-                    onClick={openForm}
+                    onClick={() => handleCreateProjectFormView(true)}
                 ><span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"><i className="fas fa-heart"
                 aria-hidden="true"></i></span>Add new project
                 </Button>

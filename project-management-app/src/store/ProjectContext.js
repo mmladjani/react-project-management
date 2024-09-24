@@ -4,7 +4,9 @@ import { nanoid } from "nanoid";
 export const ProjectContext = createContext({
     projectList: [],
     selectedProject: {},
+    handleCreateProjectFormView: () => {},
     handleCreateProject: () => {},
+    handleSelectProject: () => {},
     handleDeleteProject: () => {},
     handleAddTask: () => {},
     handleDeleteTask: () => {}
@@ -19,6 +21,7 @@ function projectListReducer(state, action){
 
         return {
             ...state,
+            selectedProject: {},
             projectList: [
                 ...state.projectList,
                 action.payload
@@ -92,6 +95,13 @@ function projectListReducer(state, action){
             })
         }
     }
+
+    if(action.type === 'VIEW_FORM'){
+        return {
+            ...state,
+            formView: action.payload,
+        }
+    }
 }
 
 export default function ProjectContextProvider({children}){
@@ -99,6 +109,7 @@ export default function ProjectContextProvider({children}){
     const [projectListState, projectListDispatch] = useReducer(projectListReducer, {
         projectList: [],
         selectedProject: {},
+        formView: false
     })
 
     function createProject(formInputValues){
@@ -136,8 +147,17 @@ export default function ProjectContextProvider({children}){
         })
     }
 
+    function createProjectFormView(view){
+        projectListDispatch({
+            type: 'VIEW_FORM',
+            payload: view
+        })
+    }
+
     const valueCtx = {
         projectList: projectListState.projectList,
+        viewForm: projectListState.viewForm,
+        handleCreateProjectFormView: createProjectFormView,
         handleCreateProject: createProject,
         handleDeleteProject: deleteProject,
         handleSelectProject: selectProject,

@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 
 const CreateProjectForm = ({ setFormVisible }) => {
 
-    const { handleCreateProject } = useContext(ProjectContext);
+    const { handleCreateProject, handleCreateProjectFormView } = useContext(ProjectContext);
 
     const inputTitle = useRef();
     const inputDescription = useRef();
@@ -20,13 +20,7 @@ const CreateProjectForm = ({ setFormVisible }) => {
             [inputDate.current.id]: inputDate.current.value,
             tasks: []
         });
-
-        closeForm();
     }
-
-    function closeForm() {
-        setFormVisible(prevState => !prevState);
-      }
 
     return (
         <div className='mx-9 my-9'>
@@ -71,7 +65,7 @@ const CreateProjectForm = ({ setFormVisible }) => {
                 <Button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add new project</Button>
             </form>
             <div className='my-3 flex flex-col max-w-lg'>
-                <Button onClick={closeForm} className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-1 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Cancel</Button>
+                <Button onClick={() => handleCreateProjectFormView(false)} className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-1 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Cancel</Button>
             </div>
         </div>
     )

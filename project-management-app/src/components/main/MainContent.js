@@ -4,14 +4,14 @@ import ProjectDetailsView from './ProjectDetailsView';
 import NoProjects from './NoProjects';
 import { ProjectContext } from '../../store/ProjectContext';
 
-const MainContent = ({formVisible, setFormVisible, setProjectList, setSelectedProject, openForm}) => {
+const MainContent = () => {
 
-    const { selectedProject } = useContext(ProjectContext);
+    const { viewForm, selectedProject } = useContext(ProjectContext);
 
     return (
         <div className='w-8/12'>
-            {formVisible || selectedProject ? '' : <NoProjects openForm={openForm}/>}
-            {formVisible && <CreateProjectForm setFormVisible={setFormVisible}/>}
+            {viewForm || selectedProject ? '' : <NoProjects />}
+            {viewForm && <CreateProjectForm />}
             {selectedProject && <ProjectDetailsView />}
         </div>
     )
