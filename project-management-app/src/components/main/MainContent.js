@@ -9,13 +9,13 @@ const MainContent = () => {
     const { formView, selectedProject } = useContext(ProjectContext);
 
     console.log(formView, 'formView');
-    console.log(selectedProject, 'selectedProject');
+    console.log(Boolean(selectedProject), 'selectedProject');
 
     return (
         <div className='w-8/12'>
-            {formView || selectedProject ? '' : <NoProjects />}
+            {formView || Boolean(selectedProject) ? '' : <NoProjects />}
             {formView && <CreateProjectForm />}
-            {selectedProject && <ProjectDetailsView />}
+            {Boolean(selectedProject) && <ProjectDetailsView />}
         </div>
     )
 }

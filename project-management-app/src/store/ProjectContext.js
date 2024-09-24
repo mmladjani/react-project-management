@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 
 export const ProjectContext = createContext({
     projectList: [],
-    selectedProject: {},
+    selectedProject: null,
     handleCreateProjectFormView: () => {},
     handleCreateProject: () => {},
     handleSelectProject: () => {},
@@ -19,7 +19,7 @@ function projectListReducer(state, action){
         return {
             ...state,
             formView: false,
-            selectedProject: {},
+            selectedProject: null,
             projectList: [
                 ...state.projectList,
                 action.payload
@@ -36,7 +36,7 @@ function projectListReducer(state, action){
             ...state,
             formView: false,
             projectList: state.projectList.filter(project => project['id'] !== action.payload['id']),
-            selectedProject: {}
+            selectedProject: null
         }
     }
     
@@ -108,7 +108,7 @@ export default function ProjectContextProvider({children}){
 
     const [projectListState, projectListDispatch] = useReducer(projectListReducer, {
         projectList: [],
-        selectedProject: {},
+        selectedProject: null,
         formView: false
     })
 
