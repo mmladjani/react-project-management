@@ -16,11 +16,9 @@ function projectListReducer(state, action){
 
     if(action.type === 'ADD_PROJECT'){  
 
-        console.log(state, 'state');
-        console.log(action, 'action');
-
         return {
             ...state,
+            formView: false,
             selectedProject: {},
             projectList: [
                 ...state.projectList,
@@ -36,8 +34,9 @@ function projectListReducer(state, action){
 
         return {
             ...state,
-            selectedProject: {},
-            projectList: state.projectList.filter(project => project['id'] !== action.payload['id'])
+            formView: false,
+            projectList: state.projectList.filter(project => project['id'] !== action.payload['id']),
+            selectedProject: {}
         }
     }
     
@@ -48,6 +47,7 @@ function projectListReducer(state, action){
 
         return {
             ...state,
+            formView: false,
             selectedProject: action.payload,
         }
     }
@@ -156,7 +156,8 @@ export default function ProjectContextProvider({children}){
 
     const valueCtx = {
         projectList: projectListState.projectList,
-        viewForm: projectListState.viewForm,
+        formView: projectListState.formView,
+        selectedProject: projectListState.selectedProject,
         handleCreateProjectFormView: createProjectFormView,
         handleCreateProject: createProject,
         handleDeleteProject: deleteProject,

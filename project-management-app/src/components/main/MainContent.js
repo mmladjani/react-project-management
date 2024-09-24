@@ -6,12 +6,15 @@ import { ProjectContext } from '../../store/ProjectContext';
 
 const MainContent = () => {
 
-    const { viewForm, selectedProject } = useContext(ProjectContext);
+    const { formView, selectedProject } = useContext(ProjectContext);
+
+    console.log(formView, 'formView');
+    console.log(selectedProject, 'selectedProject');
 
     return (
         <div className='w-8/12'>
-            {viewForm || selectedProject ? '' : <NoProjects />}
-            {viewForm && <CreateProjectForm />}
+            {formView || selectedProject ? '' : <NoProjects />}
+            {formView && <CreateProjectForm />}
             {selectedProject && <ProjectDetailsView />}
         </div>
     )

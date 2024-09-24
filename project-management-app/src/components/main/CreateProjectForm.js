@@ -3,7 +3,7 @@ import Button from '../ui/Button';
 import { ProjectContext } from '../../store/ProjectContext';
 import { nanoid } from 'nanoid';
 
-const CreateProjectForm = ({ setFormVisible }) => {
+const CreateProjectForm = () => {
 
     const { handleCreateProject, handleCreateProjectFormView } = useContext(ProjectContext);
 
@@ -11,8 +11,7 @@ const CreateProjectForm = ({ setFormVisible }) => {
     const inputDescription = useRef();
     const inputDate = useRef();
 
-    function submitForm(event) {
-
+    function submitForm() {
         handleCreateProject({
             id: nanoid(),
             [inputTitle.current.id]: inputTitle.current.value,

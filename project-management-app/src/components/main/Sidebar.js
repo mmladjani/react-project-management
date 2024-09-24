@@ -2,10 +2,10 @@ import { useContext } from 'react';
 import Button from '../ui/Button';
 import { ProjectContext } from '../../store/ProjectContext';
 
-const Sidebar = ({ openForm }) => {
+const Sidebar = () => {
 
     const { projectList, handleCreateProjectFormView, handleSelectProject } = useContext(ProjectContext);
-    
+    console.log(projectList, 'projectList')
     return (
         <div className='flex-initial w-80 bg-slate-900 rounded-tr-lg'>
             <div className='ml-9 my-9 text-white'>
