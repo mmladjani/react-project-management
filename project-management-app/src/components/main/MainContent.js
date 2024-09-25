@@ -8,9 +8,6 @@ const MainContent = () => {
 
     const { formView, selectedProject } = useContext(ProjectContext);
 
-    console.log(formView, 'formView');
-    console.log(Boolean(selectedProject), 'selectedProject');
-
     return (
         <div className='w-8/12'>
             {formView || Boolean(selectedProject) ? '' : <NoProjects />}

@@ -29,9 +29,6 @@ function projectListReducer(state, action){
 
     if(action.type === 'DELETE_PROJECT'){
 
-        console.log(state, 'state');
-        console.log(action, 'action');
-
         return {
             ...state,
             formView: false,
@@ -42,9 +39,6 @@ function projectListReducer(state, action){
     
     if(action.type === 'SELECT_PROJECT'){
 
-        console.log(state, 'state');
-        console.log(action, 'action');
-
         return {
             ...state,
             formView: false,
@@ -53,9 +47,6 @@ function projectListReducer(state, action){
     }
 
     if(action.type === 'ADD_TASK'){
-
-        console.log(state, 'state');
-        console.log(action, 'action');
 
         return {
             ...state,
@@ -79,7 +70,6 @@ function projectListReducer(state, action){
     }
 
     if(action.type === 'DELETE_TASK'){
-        console.log('delete task');
 
         return {
             ...state,
@@ -165,8 +155,6 @@ export default function ProjectContextProvider({children}){
         handleAddTask: addTask,
         handleDeleteTask: deleteTask
     }
-
-    console.log(projectListState, 'projectListState')
 
     return (
         <ProjectContext.Provider value={valueCtx}>
